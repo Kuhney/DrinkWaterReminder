@@ -1,16 +1,23 @@
-// 30-40 Milliliter pro Kilogramm Körpergewicht
-
 #include "main.h"     // Main header
 
-#include <Arduino.h>  // C system headers
 // C++ standard library headers (without file extension), e.g., <algorithm>, <cstddef>.
 
-// Other libraries' .h files.
+#include "loadcell.h"
+#include "led.h"
+
+Scale scale;
+LED led;
 
 void setup(){
-
+    Serial.begin(38400);
+    scale.init();
+    scale.setCalibrationValue(2280.0f);
+    led.init();
 }
 
 void loop(){
-  
+    scale.measure();
+    led.notificate();
+    delay(1000);
+    led.endNotification();
 }
