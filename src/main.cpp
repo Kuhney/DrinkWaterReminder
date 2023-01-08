@@ -2,22 +2,18 @@
 
 // C++ standard library headers (without file extension), e.g., <algorithm>, <cstddef>.
 
-#include "loadcell.h"
-#include "led.h"
+#include "station.h"
 
-Scale scale;
-LED led;
+Station station;
 
 void setup(){
     Serial.begin(38400);
-    scale.init();
-    scale.setCalibrationValue(2280.0f);
-    led.init();
+    station.init();
 }
 
 void loop(){
-    scale.measure();
-    led.notificate();
-    delay(1000);
-    led.endNotification();
+    station.set_change_detected(true);
+    if(station.get_change_detected()){
+        station.update();
+    }
 }
