@@ -12,7 +12,7 @@ class Scale{
         const int DOUT_PIN = LOADCELL_DOUT_PIN;
         const int SCK_PIN = LOADCELL_SCK_PIN;
 
-        float calibration_value = 0.0f;
+        float calibration_value = 2000.0f;
 
     public:
         void init();

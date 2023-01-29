@@ -4,7 +4,7 @@ void LED::init(){
     pinMode(LED_PIN, OUTPUT);
 }
 
-void LED::notificate()
+void LED::drink_notification()
 {
     digitalWrite(LED_PIN, 1);
 }

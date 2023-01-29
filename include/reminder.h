@@ -5,13 +5,15 @@
 
 class Reminder{
     private:
-        float last_drink_ts = 0.0f;
-        float drink_timer_duration = 0.0f;
+        unsigned long last_drink_ts = 0;
+        unsigned long drink_timer_duration = 5000;
+        bool notified = false;
 
     public:
         Reminder();
-        void restartDrinkTimer();
-        void checkTimer();
+        void set_reminder(unsigned long time);
+        void restart_drink_timer();
+        bool check_drink_timer();
 };
 
 #endif // REMINDER_H

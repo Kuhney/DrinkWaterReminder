@@ -7,7 +7,8 @@ void User::calc_water_intake_goal(){
 void User::drink(float water_amount){
     total_water_intake += water_amount;
     remaining_water_intake = water_intake_goal - total_water_intake;
-    reminder.restartDrinkTimer();
+    reminder.restart_drink_timer();
+    Serial.println("User drank");
 }
 
 void User::dayReset(){

@@ -11,7 +11,7 @@ class LED{
 
     public:
         void init();
-        void notificate();
+        void drink_notification();
         void endNotification();
 
 };
