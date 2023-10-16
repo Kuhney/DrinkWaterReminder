@@ -43,6 +43,8 @@ void Scale::calibrateWithSerial(void)
   hx711.set_scale(calibration_value);
   Serial.print("Calibration Value = ");
   Serial.println(calibration_value);
+  hx711.tare();
+  delay(100);
   Serial.print("Scale now measures: ");
   Serial.println(hx711.get_units(10));
   hx711.power_down();

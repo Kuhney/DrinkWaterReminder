@@ -12,7 +12,6 @@ volatile bool button_pressed = false;
 void isr(){
     if(!button_pressed){
         button_pressed=true;
-        Serial.println("Button pressed");
     }
 }
 
@@ -29,8 +28,10 @@ void setup(){
 
 void loop(){
     if(button_pressed){
-        button_pressed=false;
+        noInterrupts();
         station.update();
+        button_pressed=false;
+        interrupts();
     }
     if(station.reminder.check_drink_timer()){
         station.notify();

@@ -2,16 +2,15 @@
 #define BOTTLE_H
 
 #include "loadcell.h"
+#include "enums.h"
 
 class Bottle{
     public:
-        float full_weight = 0.0f;
-        float empty_weight = 0.0f;
-        float current_weight = 0.0f;
-        float last_weight = 0.0f;
-        float current_weight_diff = 0.0f;
+        float weight = 0.0f;
+        float volume = 0.0f;
+        float consumed_volume = 0.0f;
 
-        void update_weigth(Scale scale);
+        BottleUpdateOptions update(Scale scale);
         float convert_weight_to_ml(float weight);
 };
 

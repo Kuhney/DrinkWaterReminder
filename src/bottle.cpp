@@ -1,15 +1,30 @@
 #include "bottle.h"
 
-void Bottle::update_weigth(Scale scale){
-    last_weight = current_weight;
-    current_weight = scale.measure();
-    current_weight_diff = current_weight - last_weight;
-    if(current_weight_diff > 0){
-        empty_weight = last_weight;
-        full_weight = current_weight;
+
+BottleUpdateOptions Bottle::update(Scale scale)
+{
+    float measured_weight = scale.measure();
+    float weight_diff = weight - measured_weight;
+
+    if (weight_diff < 3){
+        return Ignored;
     }
+
+    weight = measured_weight;
+    volume = convert_weight_to_ml(weight);
+
+    if (weight_diff > 0){
+        consumed_volume = convert_weight_to_ml(weight_diff);
+        Serial.print("| User drank ");
+        Serial.print(consumed_volume);
+        Serial.println("ml from bottle |");
+        return Consumed;
+    }
+    
+    Serial.println("| Bottle refilled |");
+    return Refilled;
 }
 
 float Bottle::convert_weight_to_ml(float weight){
-    return weight*1000;
+    return weight*1;
 }

@@ -1,18 +1,24 @@
 #include "station.h"
 
+
 void Station::update(){
     led.endNotification();
-    bottle.update_weigth(scale);
-    user.drink(bottle.convert_weight_to_ml(bottle.current_weight_diff));
-    change_detected = false;
+    if (bottle.update(scale) == Consumed){
+        if (user.drink(bottle.consumed_volume) == InProgress) {
+            reminder.restart_drink_timer();
+        }else{
+            reminder.set_reminder_for_next_day();
+        }
+    }
 }
 
 void Station::init(){
     scale.init();
-    reminder.set_reminder(100);
+    // reminder.set_reminder(100);
     led.init();
 }
 
 void Station::notify(){
     led.drink_notification();
+    reminder.notified = true;
 }

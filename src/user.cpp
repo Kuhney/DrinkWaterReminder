@@ -4,14 +4,18 @@ void User::calc_water_intake_goal(){
     water_intake_goal = weight*(30+activity_level);
 }
 
-void User::drink(float water_amount){
-    total_water_intake += water_amount;
-    remaining_water_intake = water_intake_goal - total_water_intake;
-    reminder.restart_drink_timer();
-    Serial.println("User drank");
+DrinkStatus User::drink(float water_amount){
+    if (water_amount < 0){
+        Serial.println("Error. Trying to drink negative water");
+    }
+    remaining_water_intake -= water_amount;
+    if (remaining_water_intake > 0){
+        return InProgress;
+    }
+    return Finished;
 }
 
 void User::dayReset(){
-    total_water_intake = 0.0f;
+    water_intake_progress = 0.0f;
     remaining_water_intake = water_intake_goal;
 }

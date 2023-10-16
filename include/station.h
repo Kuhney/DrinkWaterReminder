@@ -8,7 +8,6 @@
 
 class Station{
     private:
-        bool change_detected = false;
     	Bottle bottle;
         LED led;
         User user;
@@ -17,9 +16,7 @@ class Station{
     public:
         Scale scale;
         Reminder reminder;
-
-        bool get_change_detected(){return change_detected;};
-        void set_change_detected(bool value){change_detected = value;};
+        
         void update();
         void init();
         void notify();
